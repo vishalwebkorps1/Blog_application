@@ -41,3 +41,4 @@ export default class extends Controller {
         editButton.classList.toggle("btn-warning");
     }
 }
+    
