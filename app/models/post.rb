@@ -2,7 +2,7 @@ class Post < ApplicationRecord
     extend FriendlyId
     validates :tittle, presence: true, length: {minimum: 5 , maximum: 50}
     validates :body, presence: true
-    has_rich_text :body
+
     belongs_to :user
     has_many :comments, dependent: :destroy
     has_one :content, class_name: 'ActionText::RichText', as: :record, dependent: :destroy
@@ -14,6 +14,4 @@ class Post < ApplicationRecord
     def should_generate_new_friendly_id?
         tittle_changed? || slug.blank?
     end
-
-
 end
