@@ -53,9 +53,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
        :password,
         :password_confirmation,
          :current_password, 
-         :first_name, 
-         :last_name,
-         { address: %i[street city state zip country]}])
+          :first_name, 
+          :last_name,
+           { address: %i[street city state zip country]}])
   end
 
   # The path used after sign up.
