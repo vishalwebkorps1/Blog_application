@@ -83,3 +83,6 @@ gem "bullet", "~> 7.0"
 gem "activerecord-import", "~> 1.4"
 
 gem "wicked", "~> 2.0"
+
+gem "stripe", "~> 7.1"
+gem "pay", "~> 5.0"

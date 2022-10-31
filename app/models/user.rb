@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include SubscriptionConcern
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -7,6 +8,8 @@ class User < ApplicationRecord
    has_many :comments, dependent: :destroy
 
    has_many :notifications, as: :recipient, dependent: :destroy
+
+   pay_customer stripe_attributes: :stripe_attributes
 
    has_one :address, dependent: :destroy, inverse_of: :user, autosave: true
    
@@ -43,6 +46,19 @@ class User < ApplicationRecord
     form_step.nil?
     form_steps.index(step.to_s) <= form_steps.index(form_step.to_s)
    end
+
+   def stripe_attributes(pay_customer)
+    {
+      address:{
+        city: pay_customer.owner.city,
+        country: pay_customer.owner.country
+      },
+      metadata:{
+        pay_customer_id: pay_customer.id,
+        user_id: id
+      }
+    }
+  end
 
    private
 
